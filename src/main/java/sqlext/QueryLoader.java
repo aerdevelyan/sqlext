@@ -18,14 +18,25 @@ public class QueryLoader {
 	public void load() {
 		try {
 			JAXBContext ctx = JAXBContext.newInstance(Queries.class);
-			Unmarshaller u = ctx.createUnmarshaller();
+			Unmarshaller unmarshaller = ctx.createUnmarshaller();
 			for (InputStream src : inputSources) {
-				Queries q = (Queries) u.unmarshal(src);
-				groupedQueries.put(q.getGroup(), q); 
+				Queries queries = (Queries) unmarshaller.unmarshal(src);
+				addQueriesToGroup(queries);
 			}
 		} 
 		catch (JAXBException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private void addQueriesToGroup(Queries queries) {
+		// if queries with that group name are exist, merge them
+		Queries storedQueries = groupedQueries.get(queries.getGroupName());
+		if (storedQueries != null) {
+			storedQueries.addQueries(queries.getQueries());
+		}
+		else {
+			groupedQueries.put(queries.getGroupName(), queries);
 		}
 	}
 	
