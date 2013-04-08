@@ -15,8 +15,10 @@ public class Queries {
 	
 	@XmlAttribute(name="group")
 	private String groupName;
+	
 	@XmlElement(name="query")
 	private Collection<Query> queries;
+	
 	
 	public void addQueries(Collection<Query> newQueries) {
 		if (queries == null) {

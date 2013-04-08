@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Contains queries. Can have a 'group' attribute to facilitate query grouping. Query group can serve as 
+     a namespace for queries. If 'group' attribute is omitted, queries are belong to 'default' group. -->
 <queries group="general">
-	<query name="findAssets">
+	
+	<!-- Definition of a single named query. Name attribute is mandatory. -->
+	<query name="query_name1">
+	
+		<!-- Definition of a concrete SQL version of query. Versions are different by SQL dialect which can be 
+		     specified in the attribute 'dialect'. If dialect is not specified, query version is considered as 
+		     "generic" which should be compatible with any database server. The values are listed in SqlDialectEnum -->
 		<sql>
-			select * from asset
+			generic_sql_query1
 		</sql>
+	
 		<sql dialect="oracle">
-			select * from asset
+			oracle_sql_query1
 		</sql>		
+	
 	</query>
+
 </queries>

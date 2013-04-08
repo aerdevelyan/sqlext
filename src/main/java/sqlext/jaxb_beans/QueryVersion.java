@@ -9,14 +9,16 @@ import javax.xml.bind.annotation.XmlValue;
 public class QueryVersion {
 	
 	@XmlAttribute(name="dialect")
-	private String dialect;
+	private SqlDialectEnum dialect;
+	
 	@XmlValue
 	private String queryText;
 	
-	public String getDialect() {
+	
+	public SqlDialectEnum getDialect() {
 		return dialect;
 	}
-	public void setDialect(String dialect) {
+	public void setDialect(SqlDialectEnum dialect) {
 		this.dialect = dialect;
 	}
 	public String getQueryText() {

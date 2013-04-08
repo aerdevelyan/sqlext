@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<queries>
+	<query name="query_name3">
+		<sql>
+			generic_sql_query3
+		</sql>
+		<sql dialect="oracle">
+			oracle_sql_query3
+		</sql>
+		<sql dialect="mssql">
+			mssql_sql_query3
+		</sql>		
+	</query>
+	
+	<query>
+		<sql>nameless_query</sql>
+	</query>
+</queries>

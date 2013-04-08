@@ -10,17 +10,21 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import sqlext.jaxb_beans.Queries;
+import sqlext.jaxb_beans.Query;
+import sqlext.jaxb_beans.SqlDialectEnum;
 
 public class QueryLoader {
 	private Collection<InputStream> inputSources;
 	private Map<String, Queries> groupedQueries = new HashMap<String, Queries>();
 
-	public void load() {
+	public void load(SqlDialectEnum dialect) {
 		try {
 			JAXBContext ctx = JAXBContext.newInstance(Queries.class);
 			Unmarshaller unmarshaller = ctx.createUnmarshaller();
+			unmarshaller.setEventHandler(new QueryValidationHandler());
 			for (InputStream src : inputSources) {
 				Queries queries = (Queries) unmarshaller.unmarshal(src);
+				validateAndFilterQueries(queries.getQueries(), dialect);
 				addQueriesToGroup(queries);
 			}
 		} 
@@ -40,6 +44,16 @@ public class QueryLoader {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param dialect
+	 */
+	private void validateAndFilterQueries(Collection<Query> queries, SqlDialectEnum dialect) {
+		for (Query q : queries) {
+			
+		}
+	}
+	
 	public void setInputSources(Collection<InputStream> inputSources) {
 		this.inputSources = inputSources;
 	}
@@ -47,4 +61,29 @@ public class QueryLoader {
 	public Map<String, Queries> getGroupedQueries() {
 		return groupedQueries;
 	}
+	
+	/**
+	 * Get the query by its name in the 'default' group. 
+	 * @param queryName
+	 * @return
+	 */
+	public String getQuery(String queryName) {
+		return getQuery(null, queryName);
+	}
+	
+	/**
+	 * Get the query by its name and group name.
+	 * @param groupName
+	 * @param queryName
+	 * @return
+	 */
+	public String getQuery(String groupName, String queryName) {
+		Queries groupQueries = groupedQueries.get(groupName);
+		for (Query q : groupQueries.getQueries()) {
+			if (q.getName().equals(queryName)) {
+				return "";
+			}
+		}
+		return null;
+	}	
 }

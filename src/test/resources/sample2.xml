@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <queries group="general">
-	<query name="getAssetTypes">
+	<query name="query_name2">
 		<sql>
-			select * from asset_type
+			generic_sql_query2
 		</sql>
 		<sql dialect="oracle">
-			select * from asset_type
+			oracle_sql_query2
 		</sql>
 		<sql dialect="mssql">
-			select * from asset_type
+			mssql_sql_query2
 		</sql>		
 	</query>
 </queries>

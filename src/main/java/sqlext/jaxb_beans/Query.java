@@ -10,8 +10,9 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Query {
 	
-	@XmlAttribute(name="name")
+	@XmlAttribute(name="name", required = true)
 	private String name;
+	
 	@XmlElement(name="sql")
 	private Collection<QueryVersion> versions;
 	
