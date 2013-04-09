@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Queries without group and some non-valid queries that should be discarded at load time -->
 <queries>
 	<query name="query_name3">
-		<sql>
+		<sql dialect="generic">
 			generic_sql_query3
 		</sql>
 		<sql dialect="oracle">
 			oracle_sql_query3
 		</sql>
 		<sql dialect="mssql">
-			mssql_sql_query3
+		<![CDATA[   
+			mssql < > sql_query3
+		]]>
 		</sql>		
 	</query>
 	
 	<query>
 		<sql>nameless_query</sql>
+	</query>
+	
+	<query name="query_wo_sql">
 	</query>
 </queries>
